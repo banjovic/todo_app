@@ -47,51 +47,59 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
       ),
-      body: ListView.builder(
-        itemCount: toDoList.length,
-        itemBuilder: (BuildContext context, index) {
-          return TodoList(
-            taskName: toDoList[index][0],
-            taskCompleted: toDoList[index][1],
-            onChanged: (value) => checkBoxChanged(index),
-            onDelete: (context) => deleteTask(index),
-          );
-        },
-      ),
-      floatingActionButton: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                left: 30,
-                right: 20,
-                top: 0,
-                bottom: 0,
-              ),
-              // padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.deepPurple.shade200,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(color: Colors.deepPurple),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(color: Colors.deepPurple),
-                  ),
-                  hintText: 'Add a new task',
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: toDoList.length,
+                itemBuilder: (BuildContext context, index) {
+                  return TodoList(
+                    taskName: toDoList[index][0],
+                    taskCompleted: toDoList[index][1],
+                    onChanged: (value) => checkBoxChanged(index),
+                    onDelete: (context) => deleteTask(index),
+                  );
+                },
               ),
             ),
-          ),
-          FloatingActionButton(
-            onPressed: saveNewTask,
-            child: const Icon(Icons.add),
-          ),
-        ],
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: Colors.deepPurple.shade200,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: const BorderSide(
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                        hintText: 'Add a new task',
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                FloatingActionButton(
+                  onPressed: saveNewTask,
+                  child: const Icon(Icons.add),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
